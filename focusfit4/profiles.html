@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Focus Profiles — FocusFit</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===================== TOP BAR ===================== -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" class="logo">FocusFit</a>
+
+      <button
+        id="menu-toggle"
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+      >
+        <span class="menu-icon"></span>
+        Menu
+      </button>
+    </div>
+
+    <nav id="nav-menu" class="nav-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="profiles.html" class="nav-link is-current">Focus Profiles</a>
+    </nav>
+  </header>
+
+  <main class="app profiles-page">
+
+    <div class="page-intro">
+      <h1>Focus Profiles</h1>
+      <p class="subtext">
+        Five focus styles, five different setups. Take the quiz to find
+        yours, or browse them all here.
+      </p>
+    </div>
+
+    <div class="profile-grid">
+
+      <article class="profile-card">
+        <span class="profile-emoji" aria-hidden="true">💤</span>
+        <div class="profile-copy">
+          <h2>Quiet Deep Worker</h2>
+          <p>
+            For people who need silence and minimal stimulation. Best in a
+            library, a clean desk, or a quiet corner, working in long
+            uninterrupted blocks.
+          </p>
+        </div>
+      </article>
+
+      <article class="profile-card">
+        <span class="profile-emoji" aria-hidden="true">☕️</span>
+        <div class="profile-copy">
+          <h2>Cafe Momentum Worker</h2>
+          <p>
+            For people who focus better around light background noise and
+            other people working. Cafes, student centers, and study lounges
+            pair well with short pomodoro-style sprints.
+          </p>
+        </div>
+      </article>
+
+      <article class="profile-card">
+        <span class="profile-emoji" aria-hidden="true">🏃‍♀️</span>
+        <div class="profile-copy">
+          <h2>Sprint Starter</h2>
+          <p>
+            For people who find starting the hardest part. Small,
+            low-pressure sprints and a 2-minute start rule turn
+            procrastination into momentum.
+          </p>
+        </div>
+      </article>
+
+      <article class="profile-card">
+        <span class="profile-emoji" aria-hidden="true">📋</span>
+        <div class="profile-copy">
+          <h2>Structured Planner</h2>
+          <p>
+            For people who focus best once everything is organized first.
+            A clear task list, ranked priorities, and time blocking keep
+            the day on track.
+          </p>
+        </div>
+      </article>
+
+      <article class="profile-card">
+        <span class="profile-emoji" aria-hidden="true">🎨</span>
+        <div class="profile-copy">
+          <h2>Creative Flow Worker</h2>
+          <p>
+            Best for design, brainstorming, writing, and other creative
+            work. Flexible sessions, inspiration boards, and ambient music
+            fuel the flow.
+          </p>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="profiles-cta">
+      <a href="index.html" class="btn-primary">Take the quiz</a>
+    </div>
+
+  </main>
+
+  <script src="nav.js"></script>
+</body>
+</html>

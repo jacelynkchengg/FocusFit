@@ -1,0 +1,1023 @@
+/* =========================================================
+   FOCUSFIT STYLES
+   Organized top to bottom:
+   1. Tokens (colors, spacing, shadows)
+   2. Reset / base styles
+   3. Layout helpers (screens, cards, container)
+   4. Top bar + expandable menu
+   5. Landing hero (full-bleed, dark)
+   6. Quiz screen (progress bar, options)
+   7. Result screen (chips, checklist)
+   8. Profiles page (rectangular cards)
+   9. Buttons
+   10. Accessibility + responsive tweaks
+   ========================================================= */
+
+/* ---------- 1. Tokens ---------- */
+:root {
+  /* Brand palette */
+  --ink: #2c1320;
+  --plum: #5f4b66;
+  --mist: #a7adc6;
+  --slate: #8797af;
+  --fog: #56667a;
+
+  /* Derived neutrals */
+  --paper: #f6f5f9;
+  --surface: #ffffff;
+  --border: #e4e1ec;
+  --mist-tint: #eeeff6;
+
+  /* Type */
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+
+  /* Shape + shadow */
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --shadow-soft: 0 20px 40px -24px rgba(44, 19, 32, 0.28);
+  --content-width: 680px;
+}
+
+/* ---------- 2. Reset / base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+h1, h2, h3 {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+p {
+  margin: 0 0 1rem 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------- 3. Layout helpers ---------- */
+.app {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 3rem) 1.25rem 4rem;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+  animation: fade-in 0.35s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.subtext {
+  color: var(--fog);
+}
+
+/* ---------- 4. Top bar + expandable menu ---------- */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.site-header-inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.menu-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.menu-toggle:hover {
+  background: var(--mist-tint);
+}
+
+.menu-icon,
+.menu-icon::before,
+.menu-icon::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+}
+
+.menu-icon {
+  position: relative;
+}
+
+.menu-icon::before {
+  position: absolute;
+  top: -5px;
+}
+
+.menu-icon::after {
+  position: absolute;
+  top: 5px;
+}
+
+/* Collapsed by default; JS toggles the "open" class */
+.nav-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  right: 1.25rem;
+  top: calc(100% + 0.5rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-soft);
+  min-width: 180px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.nav-menu.open {
+  display: flex;
+}
+
+.nav-link {
+  padding: 0.75rem 1.1rem;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.nav-link:hover {
+  background: var(--mist-tint);
+}
+
+.nav-link.is-current {
+  color: var(--plum);
+  font-weight: 600;
+}
+
+/* ---------- 5. Landing hero (full-bleed, dark) ---------- */
+.hero-section {
+  width: 100%;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(167, 173, 198, 0.35), transparent 55%),
+    radial-gradient(circle at 85% 80%, rgba(135, 151, 175, 0.4), transparent 55%),
+    linear-gradient(150deg, var(--ink) 0%, var(--plum) 55%, var(--slate) 100%);
+  padding: clamp(3rem, 10vw, 6rem) 1.25rem;
+}
+
+.hero {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-section .wordmark {
+  color: #ffffff;
+  font-size: clamp(2.75rem, 9vw, 4.5rem);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.hero-section .hero-tagline {
+  font-size: 1.15rem;
+  color: var(--mist);
+  font-weight: 600;
+  margin: 0.9rem 0 1.25rem;
+}
+
+.hero-section .hero-purpose {
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 46ch;
+  margin: 0 auto 1rem;
+}
+
+.hero-section .hero-meta {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  margin: 0 auto 1.75rem;
+}
+
+.hero-section .btn-primary {
+  background: #ffffff;
+  color: var(--ink);
+  box-shadow: 0 14px 28px -14px rgba(0, 0, 0, 0.45);
+}
+
+.hero-section .btn-primary:hover {
+  background: var(--mist-tint);
+}
+
+/* ---------- 5b. Landing sections: Why FocusFit / How It Works ---------- */
+.landing-section {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 4.5rem) 1.25rem;
+}
+
+.section-kicker {
+  color: var(--plum);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.4rem;
+}
+
+.section-heading {
+  font-size: clamp(1.5rem, 4vw, 1.9rem);
+  margin-bottom: 1.75rem;
+}
+
+.section-heading.centered {
+  text-align: center;
+}
+
+/* Why FocusFit: two reasons, side by side on desktop */
+.reason-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.reason-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.reason-number,
+.step-number {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--plum);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reason-copy h3,
+.step-copy h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+.reason-copy p,
+.step-copy p {
+  color: var(--fog);
+  margin: 0;
+}
+
+.section-closing {
+  border-left: 3px solid var(--plum);
+  padding-left: 1rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* How It Works: full-bleed soft band, vertical step list with a connecting line */
+.how-section-wrap {
+  width: 100%;
+  background: var(--mist-tint);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  position: relative;
+}
+
+.step-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 36px;
+  width: 2px;
+  height: calc(100% + 1.75rem - 36px);
+  background: var(--border);
+}
+
+/* ---------- 5c. Pomodoro timer ---------- */
+.timer-intro {
+  text-align: center;
+  max-width: 46ch;
+  margin: 0 auto 2rem;
+}
+
+.timer-card {
+  max-width: 420px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1.75rem, 5vw, 2.5rem);
+  text-align: center;
+}
+
+.timer-modes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.timer-mode-btn {
+  font-family: var(--font-body);
+  border: 1px solid var(--border);
+  background: var(--paper);
+  color: var(--fog);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.timer-mode-btn:hover {
+  border-color: var(--slate);
+}
+
+.timer-mode-btn.active {
+  background: var(--plum);
+  border-color: var(--plum);
+  color: #fff;
+}
+
+.timer-display {
+  font-size: clamp(3rem, 12vw, 3.75rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.timer-controls .btn-primary,
+.timer-controls .btn-secondary {
+  width: auto;
+  margin-top: 0;
+  padding: 0.75rem 1.5rem;
+}
+
+.timer-controls .btn-primary:disabled,
+.timer-controls .btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.timer-status {
+  color: var(--fog);
+  font-size: 0.9rem;
+  margin: 0;
+  min-height: 1.3em;
+}
+
+.btn-text {
+  display: inline-block;
+  margin-top: 1.25rem;
+  background: none;
+  border: none;
+  color: var(--plum);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.btn-text:hover {
+  color: var(--ink);
+}
+
+/* ---------- 6. Quiz screen ---------- */
+.quiz-header {
+  margin-bottom: 1.5rem;
+}
+
+.question-count {
+  color: var(--fog);
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background: var(--mist-tint);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--slate), var(--plum));
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+.quiz-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.option-btn {
+  text-align: left;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.option-btn:hover {
+  border-color: var(--slate);
+  background: var(--mist-tint);
+}
+
+.option-btn:active {
+  transform: scale(0.99);
+}
+
+.option-btn:focus-visible {
+  outline: 2px solid var(--plum);
+  outline-offset: 2px;
+}
+
+/* ---------- 7. Result screen ---------- */
+.result-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.result-header h1 {
+  font-size: clamp(1.6rem, 5vw, 2.1rem);
+}
+
+.result-header .subtext {
+  max-width: 46ch;
+  margin: 0 auto;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.result-block h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag-list li {
+  background: var(--mist-tint);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+.schedule-block {
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0;
+}
+
+.checklist input[type="checkbox"] {
+  width: 19px;
+  height: 19px;
+  accent-color: var(--plum);
+  flex-shrink: 0;
+}
+
+.checklist label {
+  color: var(--ink);
+}
+
+.step-time {
+  display: inline-block;
+  background: var(--surface);
+  border: 1px solid var(--slate);
+  color: var(--slate);
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  margin-right: 0.4rem;
+}
+
+/* ---------- 8. Profiles page (rectangular cards) ---------- */
+.page-intro {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.page-intro .subtext {
+  max-width: 46ch;
+  margin: 0 auto;
+}
+
+.profile-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profile-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: 1.5rem;
+}
+
+.profile-emoji {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.profile-copy h2 {
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}
+
+.profile-copy p {
+  color: var(--fog);
+  margin: 0;
+}
+
+.profiles-cta {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.profiles-cta .btn-primary {
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* ---------- 9. Buttons ---------- */
+.btn-primary,
+.btn-secondary {
+  font-family: var(--font-body);
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--plum);
+  color: #fff;
+  box-shadow: 0 14px 28px -14px rgba(95, 75, 102, 0.65);
+}
+
+.btn-primary:hover {
+  background: var(--ink);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--plum);
+  border: 1px solid var(--plum);
+  margin-top: 1.75rem;
+  width: 100%;
+}
+
+.btn-secondary:hover {
+  background: var(--mist-tint);
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--slate);
+  outline-offset: 2px;
+}
+
+/* ---------- 10. Accessibility + responsive tweaks ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .screen.active,
+  .progress-fill,
+  .option-btn,
+  .btn-primary,
+  .btn-secondary {
+    animation: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-card {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .reason-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-section .hero-tagline {
+    font-size: 1rem;
+  }
+}
+
+/* =========================================================
+   FOCUS MODE (full-screen overlay + wallpapers)
+   Built from illustrations pulled out of the uploaded PDF:
+   a lake/mountain scene, a trio of watercolor trees, a purple
+   tree cluster, a moon + stars, a star field, and a watercolor
+   mountain band. Everything is recolored/composed with the
+   FocusFit palette so each wallpaper still feels on-brand.
+   ========================================================= */
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+.focus-mode {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+
+.focus-mode.open {
+  display: block;
+  animation: fade-in 0.3s ease;
+}
+
+.focus-mode-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--ink);
+  overflow: hidden;
+}
+
+.focus-mode-bg::before,
+.focus-mode-bg::after {
+  content: "";
+  position: absolute;
+}
+
+/* Scrim: sits above every wallpaper so button/text contrast is
+   always reliable, no matter which background is chosen. */
+.focus-mode-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(44, 19, 32, 0.55) 0%,
+    rgba(44, 19, 32, 0.25) 45%,
+    rgba(44, 19, 32, 0.6) 100%
+  );
+}
+
+.focus-mode-content {
+  position: relative;
+  z-index: 2;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 4rem 1.25rem 2.5rem;
+  text-align: center;
+}
+
+.focus-mode-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.focus-mode-close:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Mode toggle + display + status reuse the inline timer's classes,
+   just recolored for the dark overlay. */
+.focus-modes-toggle {
+  margin-bottom: 2rem;
+}
+
+.focus-mode-content .timer-mode-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.focus-mode-content .timer-mode-btn.active {
+  background: #fff;
+  color: var(--ink);
+  border-color: #fff;
+}
+
+.focus-timer-display {
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.focus-mode-content .btn-secondary {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.focus-mode-content .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.timer-status.is-light {
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 2.5rem;
+}
+
+/* ---------- Wallpaper picker ---------- */
+.wallpaper-picker-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  margin-bottom: 0.6rem;
+}
+
+.wallpaper-options {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.wallpaper-swatch {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  padding: 0;
+}
+
+.wallpaper-swatch.active {
+  border-color: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+}
+
+.swatch-lake {
+  background-image: url("images/lake-view.jpg");
+}
+
+.swatch-dusk-trees {
+  background: linear-gradient(160deg, var(--ink), var(--plum) 60%, var(--slate));
+}
+
+.swatch-purple-grove {
+  background: linear-gradient(160deg, var(--plum), var(--slate) 70%, var(--mist));
+}
+
+.swatch-misty-peaks {
+  background: linear-gradient(160deg, var(--slate), var(--fog) 60%, var(--ink));
+}
+
+.swatch-starry-night {
+  background: linear-gradient(160deg, var(--ink), var(--plum) 85%);
+}
+
+/* ---------- The five wallpapers ---------- */
+
+/* 1. Lake View — the illustration used almost as-is; it already
+      sits comfortably in the blue/slate family. */
+.wallpaper-lake {
+  background-image: url("images/lake-view.jpg");
+}
+
+/* 2. Dusk Trees — palette gradient + the trio of watercolor trees
+      anchored to the bottom. */
+.wallpaper-dusk-trees {
+  background-image: linear-gradient(160deg, var(--ink) 0%, var(--plum) 55%, var(--slate) 100%);
+}
+
+.wallpaper-dusk-trees::after {
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(70vw, 480px);
+  height: 60%;
+  background-image: url("images/tree-trio.webp");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: contain;
+}
+
+/* 3. Purple Grove — plum-to-mist gradient with the wide tree
+      cluster spanning the bottom edge. */
+.wallpaper-purple-grove {
+  background-image: linear-gradient(160deg, var(--plum) 0%, var(--slate) 65%, var(--mist) 100%);
+}
+
+.wallpaper-purple-grove::after {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 48%;
+  background-image: url("images/tree-cluster.webp");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: contain;
+}
+
+/* 4. Misty Peaks — slate/fog gradient with the watercolor mountain
+      band along the bottom. */
+.wallpaper-misty-peaks {
+  background-image: linear-gradient(160deg, var(--slate) 0%, var(--fog) 55%, var(--ink) 100%);
+}
+
+.wallpaper-misty-peaks::after {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  background-image: url("images/mountain-band.webp");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
+  opacity: 0.95;
+}
+
+/* 5. Starry Night — ink/plum gradient, a tiled star field, and the
+      moon tucked in the upper corner. */
+.wallpaper-starry-night {
+  background-image: linear-gradient(160deg, var(--ink) 0%, var(--plum) 85%);
+}
+
+.wallpaper-starry-night::before {
+  inset: 0;
+  background-image: url("images/star-field.webp");
+  background-repeat: repeat;
+  background-size: 320px auto;
+  opacity: 0.3;
+}
+
+.wallpaper-starry-night::after {
+  top: 8%;
+  right: 6%;
+  width: min(45vw, 240px);
+  height: min(45vw, 240px);
+  background-image: url("images/moon-stars.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* ---------- Focus Mode responsive tweaks ---------- */
+@media (max-width: 480px) {
+  .focus-timer-display {
+    font-size: 3rem;
+  }
+
+  .wallpaper-swatch {
+    width: 36px;
+    height: 36px;
+  }
+}

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FocusFit — Find Your Focus Style</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===================== TOP BAR ===================== -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" class="logo">FocusFit</a>
+
+      <button
+        id="menu-toggle"
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+      >
+        <span class="menu-icon"></span>
+        Menu
+      </button>
+    </div>
+
+    <nav id="nav-menu" class="nav-menu">
+      <a href="index.html" class="nav-link is-current">Home</a>
+      <a href="profiles.html" class="nav-link">Focus Profiles</a>
+    </nav>
+  </header>
+
+  <!-- ===================== LANDING SCREEN (full-bleed hero) ===================== -->
+  <section id="landing-screen" class="screen active">
+
+    <div class="hero-section">
+      <div class="hero">
+        <h1 class="wordmark">FocusFit</h1>
+        <p class="hero-tagline">Find the focus setup that actually works for you.</p>
+        <p class="hero-purpose">
+          FocusFit helps students discover their ideal focus environment, study
+          method, and work schedule — built around your distractions, energy
+          patterns, task type, and surroundings.
+        </p>
+        <p class="hero-meta">10 quick questions. About 2 minutes.</p>
+        <button id="start-btn" class="btn-primary">Start the quiz</button>
+      </div>
+    </div>
+
+    <!-- ===================== WHY FOCUSFIT ===================== -->
+    <section class="landing-section why-section">
+      <p class="section-kicker">Why FocusFit</p>
+      <h2 class="section-heading">Why is it so hard to focus?</h2>
+
+      <div class="reason-grid">
+        <div class="reason-item">
+          <span class="reason-number">1</span>
+          <div class="reason-copy">
+            <h3>Generic advice doesn't work for everyone</h3>
+            <p>
+              Some students need silence, while others need background
+              energy, structure, creative freedom, or a motivational boost
+              to start.
+            </p>
+          </div>
+        </div>
+
+        <div class="reason-item">
+          <span class="reason-number">2</span>
+          <div class="reason-copy">
+            <h3>Your environment affects your focus</h3>
+            <p>
+              Where you work, what surrounds you, and how you start can
+              change how productive you feel.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-closing">
+        FocusFit turns your quiz answers into a specific method, schedule,
+        and checklist.
+      </p>
+    </section>
+
+    <!-- ===================== HOW IT WORKS ===================== -->
+    <div class="how-section-wrap">
+      <section class="landing-section how-section">
+        <h2 class="section-heading centered">How It Works</h2>
+
+        <ol class="steps-list">
+          <li class="step-item">
+            <span class="step-number">1</span>
+            <div class="step-copy">
+              <h3>Answer 10 quick questions</h3>
+              <p>Tell us about your distractions, energy, task style, and ideal surroundings.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <span class="step-number">2</span>
+            <div class="step-copy">
+              <h3>Get your focus profile</h3>
+              <p>Discover which study setup fits you best today.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <span class="step-number">3</span>
+            <div class="step-copy">
+              <h3>Follow your custom plan</h3>
+              <p>Use your recommended method, schedule, and checklist to start working.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <span class="step-number">4</span>
+            <div class="step-copy">
+              <h3>Retake anytime</h3>
+              <p>Your best focus setup can change depending on the task or day.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+    </div>
+
+    <!-- ===================== POMODORO TIMER ===================== -->
+    <section class="landing-section timer-section">
+      <p class="section-kicker">Try It Now</p>
+      <h2 class="section-heading centered">Focus Timer</h2>
+      <p class="subtext timer-intro">
+        Start a Pomodoro-style session right here — no login, no setup.
+      </p>
+
+      <div class="timer-card">
+        <div class="timer-modes">
+          <button class="timer-mode-btn active" data-minutes="25">Focus (25m)</button>
+          <button class="timer-mode-btn" data-minutes="5">Short break (5m)</button>
+          <button class="timer-mode-btn" data-minutes="15">Long break (15m)</button>
+        </div>
+
+        <div id="timer-display" class="timer-display">25:00</div>
+
+        <div class="timer-controls">
+          <button id="timer-start" class="btn-primary">Start</button>
+          <button id="timer-pause" class="btn-secondary" disabled>Pause</button>
+          <button id="timer-reset" class="btn-secondary">Reset</button>
+        </div>
+
+        <p id="timer-status" class="timer-status">Ready when you are.</p>
+
+        <button id="enter-focus-mode" class="btn-text">Enter Focus Mode 🌙</button>
+      </div>
+    </section>
+
+  </section>
+
+  <!-- ===================== FOCUS MODE (full-screen overlay) ===================== -->
+  <div id="focus-mode" class="focus-mode" aria-hidden="true">
+    <div id="focus-mode-bg" class="focus-mode-bg wallpaper-lake"></div>
+    <div class="focus-mode-scrim"></div>
+
+    <div class="focus-mode-content">
+      <button id="focus-mode-close" class="focus-mode-close" aria-label="Exit focus mode">✕</button>
+
+      <div class="timer-modes focus-modes-toggle">
+        <button class="timer-mode-btn active" data-minutes="25">Focus (25m)</button>
+        <button class="timer-mode-btn" data-minutes="5">Short break (5m)</button>
+        <button class="timer-mode-btn" data-minutes="15">Long break (15m)</button>
+      </div>
+
+      <div id="focus-timer-display" class="timer-display focus-timer-display">25:00</div>
+
+      <div class="timer-controls">
+        <button id="focus-start" class="btn-primary">Start</button>
+        <button id="focus-pause" class="btn-secondary" disabled>Pause</button>
+        <button id="focus-reset" class="btn-secondary">Reset</button>
+      </div>
+
+      <p id="focus-status" class="timer-status is-light">Ready when you are.</p>
+
+      <div class="wallpaper-picker">
+        <p class="wallpaper-picker-label">Choose a wallpaper</p>
+        <div class="wallpaper-options">
+          <button class="wallpaper-swatch swatch-lake active" data-wallpaper="wallpaper-lake" aria-label="Lake view"></button>
+          <button class="wallpaper-swatch swatch-dusk-trees" data-wallpaper="wallpaper-dusk-trees" aria-label="Dusk trees"></button>
+          <button class="wallpaper-swatch swatch-purple-grove" data-wallpaper="wallpaper-purple-grove" aria-label="Purple grove"></button>
+          <button class="wallpaper-swatch swatch-misty-peaks" data-wallpaper="wallpaper-misty-peaks" aria-label="Misty peaks"></button>
+          <button class="wallpaper-swatch swatch-starry-night" data-wallpaper="wallpaper-starry-night" aria-label="Starry night"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="app">
+
+    <!-- ===================== QUIZ SCREEN ===================== -->
+    <section id="quiz-screen" class="screen">
+      <div class="quiz-header">
+        <p id="question-count" class="question-count"></p>
+        <div class="progress-track">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="card quiz-card">
+        <h2 id="question-text"></h2>
+        <div id="options-list" class="options-list"></div>
+      </div>
+    </section>
+
+    <!-- ===================== RESULT SCREEN ===================== -->
+    <section id="result-screen" class="screen">
+      <div class="card result-card">
+
+        <div class="result-header">
+          <h1 id="result-title"></h1>
+          <p id="result-description" class="subtext"></p>
+        </div>
+
+        <div class="result-grid">
+          <div class="result-block">
+            <h3>Where to work</h3>
+            <ul id="result-environment" class="tag-list"></ul>
+          </div>
+          <div class="result-block">
+            <h3>Methods to try</h3>
+            <ul id="result-methods" class="tag-list"></ul>
+          </div>
+        </div>
+
+        <div class="result-block schedule-block">
+          <h3>Your session schedule</h3>
+          <ul id="result-schedule" class="checklist"></ul>
+        </div>
+
+        <button id="retake-btn" class="btn-secondary">Retake the quiz</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="nav.js"></script>
+  <script src="timer.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
